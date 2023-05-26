@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Bank {
 
-    int accountNumber;
+    int accountTenNumbers;
     String office;
     static final String entity = "0049";
     String country;
@@ -104,7 +104,7 @@ public class Bank {
 
         //todo leer archivo numberOfAccounts.dat y sacar las cuentas creadas , sumarle 1
         //todo y meterlo en el atributo de clase (accountNumber) y sobreescribimos el archivo con el nuevo valor
-        accountNumber=1234567890;
+        accountTenNumbers=1234567890;
 
 
         System.out.println("Select an account type: ");
@@ -113,14 +113,14 @@ public class Bank {
         election = scNumber.nextInt();
 
         if (election==1){
-            String numCuentaString= Integer.toString(accountNumber);
+            String numCuentaString= Integer.toString(accountTenNumbers);
             DebitAccount tempDebAcc = new DebitAccount(numCuentaString);
             //todo guardamos accountNumber en el archivo numberOfAccounts.dat
             accounts.add(tempDebAcc);
 
 
         } else if (election==2){
-            String numCuentaString= Integer.toString(accountNumber);
+            String numCuentaString= Integer.toString(accountTenNumbers);
             CreditAccount tempCredAcc = new CreditAccount(numCuentaString);
             //todo guardamos accountNumber en el archivo numberOfAccounts.dat
             accounts.add(tempCredAcc);
@@ -132,6 +132,17 @@ public class Bank {
 
     }
 
+    public void removeClient(String dni){
 
+    }
 
+    public void removeAccount(String accountTenNumbers){
+
+    }
+
+    public void showClient(String dni){
+
+    }
+
+    public void showAccount(String accountTenNumbers){}
 }
