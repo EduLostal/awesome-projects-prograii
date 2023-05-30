@@ -31,4 +31,5 @@ public abstract class Client  {
         fullData = dni+" - "+getFullName()+" - "+address+" - "+phoneNumber+"\n";
         return fullData;
     }
+
 }
