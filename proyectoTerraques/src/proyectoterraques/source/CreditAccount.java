@@ -2,7 +2,7 @@ package proyectoterraques.source;
 
 import proyectoterraques.exceptions.InvalidCharacterException;
 
-public class CreditAccount extends Account implements AccountMethods{
+public class CreditAccount extends Account implements AccountManagement{
 
     static final double interest=20; //Interes del 20%
     double debt;

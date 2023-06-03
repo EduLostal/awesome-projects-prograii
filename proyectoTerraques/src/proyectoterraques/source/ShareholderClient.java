@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ShareholderClient extends Client implements ClientMethods{
+public class ShareholderClient extends Client implements ClientManagement{
 
     Scanner scNumber = new Scanner(System.in);
     Scanner scText = new Scanner(System.in);

@@ -24,12 +24,14 @@ public class Login {
             option=scNumber.nextInt();
 
             if (option==1){
-
+                clearScreen();
+                clearConsole();
                 //TODO listar bancos
                 FileHandler fileHandler = new FileHandler();
                 int bankNumber=1;
                 String suboption;
                 System.out.println("\nOFFICE\t\tOFFICE FULL ADDRESS\t\tCOUNTRY\t\tCODE\tCITY");
+                System.out.println("------------------------------------------------------------------");
 
                 path="src/proyectoterraques/files/banks.dat";
 
@@ -45,7 +47,7 @@ public class Login {
                     String country=separarTexto[4];
 
 
-                    System.out.println(office+" - "+address+" - "+countryName+" - "+country+" - "+city);
+                    System.out.println(office+"\t\t"+address+"\t\t"+countryName+"\t\t"+country+"\t\t"+city);
                     bankNumber++;
                     /*Client tempClient = new Client(name,surName,address,phone);
                     clients.add(tempClient);
@@ -66,7 +68,30 @@ public class Login {
         }while (option!=2);
     }
 
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
+    public final static void clearConsole()
+    {
+        try
+        {
+            final String os = System.getProperty("os.name");
 
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e)
+        {
+            //  Handle any exceptions.
+        }
+    }
 
 }

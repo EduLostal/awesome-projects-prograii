@@ -2,7 +2,7 @@ package proyectoterraques.source;
 
 import proyectoterraques.exceptions.InvalidCharacterException;
 
-public class DebitAccount extends Account implements AccountMethods{
+public class DebitAccount extends Account implements AccountManagement{
 
     public DebitAccount(String accountNumber) {
         super(accountNumber);
