@@ -2,7 +2,7 @@ package proyectoterraques.source;
 
 import proyectoterraques.exceptions.InvalidCharacterException;
 
-public interface AccountManagement {
+public interface AccountBalance {
 
 
    void deposit(double quantity)throws InvalidCharacterException;

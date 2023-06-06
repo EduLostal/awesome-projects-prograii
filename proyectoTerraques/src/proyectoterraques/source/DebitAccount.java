@@ -2,7 +2,7 @@ package proyectoterraques.source;
 
 import proyectoterraques.exceptions.InvalidCharacterException;
 
-public class DebitAccount extends Account implements AccountManagement{
+public class DebitAccount extends Account implements AccountBalance {
 
     public DebitAccount(String accountNumber) {
         super(accountNumber);
@@ -21,7 +21,7 @@ public class DebitAccount extends Account implements AccountManagement{
     @Override
     public void showAccountData() {
         System.out.println("Account - "+accountNumber);
-        System.out.println("Amount - "+amount+"€\n");
+        System.out.println("Balance - "+amount+"€\n");
 
     }
 
@@ -31,8 +31,8 @@ public class DebitAccount extends Account implements AccountManagement{
         if ((amount+quantity)>=0){
             amount = amount+quantity;
             System.out.println("You have deposited "+quantity+"€, your new balance is "+amount+"€");
-        } else {
-            throw new InvalidCharacterException("Invalid option, only numeric characters allowed");
+        } else if ((amount+quantity)<=0){
+            throw new InvalidCharacterException("Invalid option, only positive amounts");
         }
 
 

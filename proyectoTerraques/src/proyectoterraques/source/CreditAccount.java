@@ -2,7 +2,7 @@ package proyectoterraques.source;
 
 import proyectoterraques.exceptions.InvalidCharacterException;
 
-public class CreditAccount extends Account implements AccountManagement{
+public class CreditAccount extends Account implements AccountBalance {
 
     static final double interest=20; //Interes del 20%
     double debt;
@@ -28,7 +28,7 @@ public class CreditAccount extends Account implements AccountManagement{
     @Override
     public void showAccountData() {
         System.out.println("Account - "+accountNumber);
-        System.out.println("Amount - "+amount+"€");
+        System.out.println("Balance - "+amount+"€");
         System.out.println("Debt - "+debt+"€");
         System.out.println("Interest - "+interest+"%\n");
 
