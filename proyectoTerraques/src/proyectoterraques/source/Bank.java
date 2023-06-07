@@ -29,23 +29,26 @@ public class Bank {
 
    public void getClients() {
 
-       System.out.println("---CLIENT LIST---\n");
+       System.out.println("---CLIENT LIST---");
 
        for (int i =0;i<clients.size();i++){
 
            if (clients.get(i) instanceof ShareholderClient){
-               ((ShareholderClient) clients.get(i)).getFullData();
+               System.out.println( ((ShareholderClient)clients.get(i)).getFullData() );
            } else if (clients.get(i) instanceof StandardClient) {
-               ((StandardClient) clients.get(i)).getFullData();
+               System.out.println( ((StandardClient)clients.get(i)).getFullData() );
            }
 
+       }
+       if(clients.size()==0){
+           System.out.println("No clients found\n");
        }
 
    }
 
    public void getAccounts() {
 
-           System.out.println("---ACCOUNT LIST---\n");
+           System.out.println("---ACCOUNT LIST---");
 
         for (int i =0;i<accounts.size();i++){
 
@@ -56,6 +59,9 @@ public class Bank {
             }
 
         }
+       if(accounts.size()==0){
+           System.out.println("No accounts found\n");
+       }
    }
 
    public void newClient() throws InvalidCharacterException {
@@ -69,45 +75,83 @@ public class Bank {
        String address;
        String phoneNumber;
 
-
-       System.out.println("Select a client type: ");
+       System.out.println("\nCREATE CLIENT");
        System.out.println("1 - Standard");
        System.out.println("2 - Shareholder");
+       System.out.print("\nSelect a client type: ");
        election = scNumber.nextInt();
        if (election==1){
 
            System.out.print("Dni: ");
-           dni = scText.next();
+           dni = scText.nextLine();
            System.out.print("Name: ");
-           name = scText.next();
+           name = scText.nextLine();
            System.out.print("Surname: ");
-           surname = scText.next();
+           surname = scText.nextLine();
            System.out.print("Address: ");
-           address = scText.next();
+           address = scText.nextLine();
            System.out.print("Phone Number: ");
-           phoneNumber = scText.next();
+           phoneNumber = scText.nextLine();
 
            StandardClient client = new StandardClient(dni,name,surname,address,phoneNumber);
 
-           clients.add(client);
+           //todo
+
+           Account acc = newAccount();
+
+           boolean remove_acc = client.addAccount(acc);
+
+           if(remove_acc){
+               //todo borrar cuenta crecreada (acc)
+               for(int i=0;i<accounts.size();i++){
+                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                       accounts.remove(i);
+                       //System.out.println("Cuenta borrada");
+                   }
+               }
+           }else{
+               clients.add(client);
+               //System.out.println("xxx");
+               //System.out.println(clients.get(0).dni);
+           }
+
+
 
            //TODO  añadir el cliente al archivo clients.dat
 
        } else if (election==2){
            System.out.print("Dni: ");
-           dni = scText.next();
+           dni = scText.nextLine();
            System.out.print("Name: ");
-           name = scText.next();
+           name = scText.nextLine();
            System.out.print("Surname: ");
-           surname = scText.next();
+           surname = scText.nextLine();
            System.out.print("Address: ");
-           address = scText.next();
+           address = scText.nextLine();
            System.out.print("Phone Number: ");
-           phoneNumber = scText.next();
+           phoneNumber = scText.nextLine();
 
            ShareholderClient client = new ShareholderClient(dni,name,surname,address,phoneNumber);
 
-           clients.add(client);
+           Account acc = newAccount();
+
+           boolean remove_acc = client.addAccount(acc);
+
+           if(remove_acc){
+               //todo borrar cuenta crecreada (acc)
+               for(int i=0;i<accounts.size();i++){
+                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                       accounts.remove(i);
+                       //System.out.println("Cuenta borrada");
+                   }
+               }
+           }else{
+               clients.add(client);
+               //System.out.println("yyy");
+           }
+
+
+
 
            //TODO  añadir el cliente al archivo clients.dat
 
@@ -118,7 +162,7 @@ public class Bank {
    }
 
 
-    public void newAccount() throws InvalidCharacterException {
+    public Account newAccount() throws InvalidCharacterException {
 
         int election;
 
@@ -142,6 +186,7 @@ public class Bank {
             accounts.add(tempDebAcc);
             System.out.println("\nDebit account successfully created\n");
 
+            return tempDebAcc;
 
 
         } else if (election==2){
@@ -150,62 +195,156 @@ public class Bank {
             accounts.add(tempCredAcc);
             System.out.println("\nCredit account successfully created\n");
 
+            return tempCredAcc;
+
         }else {
+
             throw new InvalidCharacterException("Invalid option, only numeric characters allowed");
+
         }
+
 
 
     }
 
-    public void removeClient(String dni){
+    public void removeClient(){
+
+        String dni;
+        boolean found=false;
+
+        System.out.print("Enter Client DNI: ");
+        dni = scText.next();
 
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
+                found=true;
                 clients.remove(i);
-                System.out.println("Client successfully removed");
-            }else {
-                System.out.println("Client not found");
+                //todo borrar cuentas asociadas al cliente en el array de cuentas
+                System.out.println("Client successfully removed\n");
             }
+        }
+        if (!found){
+            System.err.println("Client not found");
         }
 
     }
 
-    public void removeAccount(String accountNumber){
+    public void removeAccount(){
+
+        String accountNumber;
+        boolean found=false;
+
+        System.out.print("Enter Account Number: ");
+        accountNumber = scText.nextLine();
 
         for (int i=0; i<accounts.size();i++){
+
             if (accountNumber.equalsIgnoreCase(accounts.get(i).getAccountNumber())){
+                found=true;
                 accounts.remove(i);
-                System.out.println("Account successfully removed");
-            }else {
-                System.out.println("Account not found");
+
+                //todo borrar tambien la cuenta del cliente que la tiene
+
+                for(int j=0;j<clients.size();j++){
+                    if(clients.get(j) instanceof StandardClient){
+                        if(((StandardClient)clients.get(j)).debit_Account!=null){
+                            if( ((StandardClient)clients.get(j)).debit_Account.accountNumber.equalsIgnoreCase(accountNumber) ){
+                                ((StandardClient)clients.get(j)).debit_Account=null;
+                            }
+                        }
+                        else{
+                            System.out.println("No debit account associated to the client");
+                        }
+
+                    }
+                    else if(clients.get(j) instanceof ShareholderClient){
+                        if(((ShareholderClient)clients.get(j)).credit_Account!=null){
+                            if( ((ShareholderClient)clients.get(j)).credit_Account.accountNumber.equalsIgnoreCase(accountNumber) ){
+                                ((ShareholderClient)clients.get(j)).credit_Account=null;
+                            }
+                        }
+                        else{
+                            System.out.println("No credit account associated to the client");
+                        }
+
+                        //todo otro if para las de debito con un for
+                        if(((ShareholderClient)clients.get(j)).debitAccounts.size()>0){
+                            for(int k=0;k<((ShareholderClient)clients.get(j)).debitAccounts.size();k++){
+                                if(((ShareholderClient)clients.get(j)).debitAccounts.get(k).accountNumber.equalsIgnoreCase(accountNumber)){
+                                    ((ShareholderClient)clients.get(j)).debitAccounts.remove(k);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("No debit accounts associated to the client");
+                        }
+
+                    }
+                }
+
+                System.out.println("Account successfully removed\n");
             }
+        }
+        if (!found){
+            System.err.println("Account not found");
         }
 
     }
 
-    public void showClient(String dni){
+    public void showClient(){
+
+        String dni;
+        boolean found=false;
+
+        System.out.print("Enter Client DNI: ");
+        dni = scText.next();
 
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
-                clients.get(i).getFullData();
-            }else {
-                System.out.println("Client not found");
+                found = true;
+                if (clients.get(i) instanceof StandardClient){
+                    System.out.println(clients.get(i).getFullData());
+                    ((StandardClient) clients.get(i)).listAccounts();
+
+                } else if (clients.get(i) instanceof ShareholderClient){
+                    System.out.println(clients.get(i).getFullData());
+                    ((ShareholderClient) clients.get(i)).listAccounts();
+                }
             }
+        }
+        if (!found){
+            System.err.println("Client not found");
         }
 
     }
 
-    public void showAccount(String accountNumber){
+    public void showAccount(){
 
-        for (int i=0; i<accounts.size();i++){
-            if (accountNumber.equalsIgnoreCase(accounts.get(i).getAccountNumber())){
-                System.out.println(accounts.get(i).accountNumber+" - "+accounts.get(i).getAmount()+"€");
-            }else {
-                System.out.println("Account not found");
+        String accountNumber;
+        boolean found=false;
+
+        System.out.print("Enter Account Number: ");
+        accountNumber = scText.nextLine();
+
+        for (int i=0; i<accounts.size();i++) {
+            if (accountNumber.equalsIgnoreCase(accounts.get(i).getAccountNumber())) {
+                found = true;
+                if (accounts.get(i) instanceof CreditAccount) {
+                    ((CreditAccount) accounts.get(i)).showAccountData();
+
+                } else if (accounts.get(i) instanceof DebitAccount) {
+                    ((DebitAccount) accounts.get(i)).showAccountData();
+                }
             }
         }
+        if (!found){
+                System.err.println("Account not found");
+        }
+
     }
 
+
+    //todo
     public void loadData(){
 
 
@@ -253,8 +392,45 @@ public class Bank {
 
     }
 
-    void withDrawMoney(){
+    public void withDrawMoney(){
 
+        String accountNumber;
+        boolean found=false;
+
+        System.out.print("Enter Account Number: ");
+        accountNumber = scText.nextLine();
+        for (int i=0;i< accounts.size();i++){
+
+            if (accountNumber.equalsIgnoreCase(accounts.get(i).accountNumber)){
+                found =true;
+
+                if (found){
+                    double amount=0;
+                    System.out.print("Enter quantity to withdraw: ");
+                    try {
+                        amount = scNumber.nextDouble();
+                        try {
+
+                            if (accounts.get(i) instanceof CreditAccount){
+                                ((CreditAccount) accounts.get(i)).withdraw(amount);
+
+                            } else if (accounts.get(i) instanceof DebitAccount){
+                                ((DebitAccount) accounts.get(i)).withdraw(amount);
+                            }
+
+                        }catch (InvalidCharacterException e){
+                            System.err.println("Error: "+e);
+                        }
+                    }catch(Exception e){
+                        System.err.println("Only numeric characters allowed");
+                    }
+
+                }
+            }
+        }
+        if (!found){
+            System.err.println("Account not found");
+        }
 
     }
 }
