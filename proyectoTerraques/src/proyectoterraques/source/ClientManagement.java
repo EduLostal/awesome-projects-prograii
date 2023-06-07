@@ -1,8 +1,6 @@
 package proyectoterraques.source;
 
-import proyectoterraques.exceptions.InvalidCharacterException;
-
-public interface ClientMethods {
+public interface ClientManagement {
 
     void addAccount(Account account);
     void removeAccount(String accountNumber) ;

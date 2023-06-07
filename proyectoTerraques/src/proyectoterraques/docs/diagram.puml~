@@ -13,7 +13,7 @@ class proyectoterraques.source.Bank {
 + void getClients()
 + void getAccounts()
 + void newClient()
-+ Account newAccount()
++ Acco newAccount()
 + void removeClient()
 + void removeAccount()
 + void showClient()

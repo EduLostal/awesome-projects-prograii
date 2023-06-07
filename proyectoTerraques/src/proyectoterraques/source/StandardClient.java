@@ -4,7 +4,7 @@ import proyectoterraques.exceptions.InvalidCharacterException;
 
 import java.util.Scanner;
 
-public class StandardClient extends Client implements ClientMethods{
+public class StandardClient extends Client implements ClientManagement{
 
     Scanner scNumber = new Scanner(System.in);
     Scanner scText = new Scanner(System.in);
@@ -39,8 +39,11 @@ public class StandardClient extends Client implements ClientMethods{
                 System.out.println("Debit account vinculated to client\n");
             }else {
                 System.out.println("You can't vinculate another debit account to the client\n");
+                //todo borrar cuenta del array de cuentas en Bank
+                //todo retornar un booleano a la clase Bank y si es false borrarla
             }
         } else if (account instanceof CreditAccount) {
+            //todo borrar cuenta del array de cuentas en Bank
             System.out.println("You can't vinculate a credit account to a standard client\n");
         }
     }
