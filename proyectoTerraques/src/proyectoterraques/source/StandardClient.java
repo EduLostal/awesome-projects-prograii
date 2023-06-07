@@ -4,7 +4,7 @@ import proyectoterraques.exceptions.InvalidCharacterException;
 
 import java.util.Scanner;
 
-public class StandardClient extends Client implements ClientMethods{
+public class StandardClient extends Client implements ClientManagement{
 
     Scanner scNumber = new Scanner(System.in);
     Scanner scText = new Scanner(System.in);

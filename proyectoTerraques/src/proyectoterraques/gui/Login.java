@@ -25,20 +25,29 @@ public class Login {
 
             if (option==1){
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
                 clearScreen();
                 clearConsole();
 >>>>>>> fernando.william
+=======
+                clearScreen();
+                clearConsole();
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
                 //TODO listar bancos
                 FileHandler fileHandler = new FileHandler();
                 int bankNumber=1;
                 String suboption;
                 System.out.println("\nOFFICE\t\tOFFICE FULL ADDRESS\t\tCOUNTRY\t\tCODE\tCITY");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 System.out.println("------------------------------------------------------------------");
 >>>>>>> fernando.william
+=======
+                System.out.println("------------------------------------------------------------------");
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
 
                 path="src/proyectoterraques/files/banks.dat";
 
@@ -55,10 +64,14 @@ public class Login {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     System.out.println(office+" - "+address+" - "+countryName+" - "+country+" - "+city);
 =======
                     System.out.println(office+"\t\t"+address+"\t\t"+countryName+"\t\t"+country+"\t\t"+city);
 >>>>>>> fernando.william
+=======
+                    System.out.println(office+"\t\t"+address+"\t\t"+countryName+"\t\t"+country+"\t\t"+city);
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
                     bankNumber++;
                     /*Client tempClient = new Client(name,surName,address,phone);
                     clients.add(tempClient);
@@ -80,8 +93,21 @@ public class Login {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
 
+    public final static void clearConsole()
+    {
+        try
+        {
+            final String os = System.getProperty("os.name");
 
+<<<<<<< HEAD
 =======
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -94,6 +120,8 @@ public class Login {
         {
             final String os = System.getProperty("os.name");
 
+=======
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
             if (os.contains("Windows"))
             {
                 Runtime.getRuntime().exec("cls");
@@ -108,6 +136,9 @@ public class Login {
             //  Handle any exceptions.
         }
     }
+<<<<<<< HEAD
 >>>>>>> fernando.william
+=======
+>>>>>>> c153372a156d1c07189eaf5d67e1ba6c18417bf4
 
 }
