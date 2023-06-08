@@ -41,7 +41,7 @@ public class Bank {
 
        }
        if(clients.size()==0){
-           System.out.println("No clients found\n");
+           System.err.println("No clients found\n");
        }
 
    }
@@ -60,7 +60,7 @@ public class Bank {
 
         }
        if(accounts.size()==0){
-           System.out.println("No accounts found\n");
+           System.err.println("No accounts found\n");
        }
    }
 
@@ -96,24 +96,23 @@ public class Bank {
            StandardClient client = new StandardClient(dni,name,surname,address,phoneNumber);
 
            //todo
-
+           clients.add(client);
            Account acc = newAccount();
 
-           boolean remove_acc = client.addAccount(acc);
+           //boolean remove_acc = client.addAccount(acc);
 
-           if(remove_acc){
-               //todo borrar cuenta crecreada (acc)
-               for(int i=0;i<accounts.size();i++){
-                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
-                       accounts.remove(i);
-                       //System.out.println("Cuenta borrada");
-                   }
-               }
-           }else{
-               clients.add(client);
-               //System.out.println("xxx");
-               //System.out.println(clients.get(0).dni);
-           }
+           //if(remove_acc){
+               //todo borrar cuenta creada (acc)
+               //for(int i=0;i<accounts.size();i++){
+                 //  if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                     //  accounts.remove(i);
+
+                   //}
+              // }
+           //}else{
+              // clients.add(client);
+
+           //}
 
 
 
@@ -133,22 +132,24 @@ public class Bank {
 
            ShareholderClient client = new ShareholderClient(dni,name,surname,address,phoneNumber);
 
+           clients.add(client);
+
            Account acc = newAccount();
 
-           boolean remove_acc = client.addAccount(acc);
+           //boolean remove_acc = client.addAccount(acc);
 
-           if(remove_acc){
+          // if(remove_acc){
                //todo borrar cuenta crecreada (acc)
-               for(int i=0;i<accounts.size();i++){
-                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
-                       accounts.remove(i);
+            //   for(int i=0;i<accounts.size();i++){
+              //     if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                //       accounts.remove(i);
                        //System.out.println("Cuenta borrada");
-                   }
-               }
-           }else{
-               clients.add(client);
+                  // }
+               //}
+           //}else{
+              // clients.add(client);
                //System.out.println("yyy");
-           }
+           //}
 
 
 
@@ -181,21 +182,123 @@ public class Bank {
         election = scNumber.nextInt();
 
         if (election==1){
-            DebitAccount tempDebAcc = new DebitAccount(accountNumber);
-            //todo guardamos accountNumber en el archivo numberOfAccounts.dat
-            accounts.add(tempDebAcc);
-            System.out.println("\nDebit account successfully created\n");
 
-            return tempDebAcc;
+            System.out.print("Enter client DNI to vinculate: ");
+            String dni_selected = scText.nextLine();
+            boolean client_found = false;
+
+            for (int i=0; i<clients.size(); i++) {
+                if (clients.get(i).getDni().equalsIgnoreCase(dni_selected)){
+
+                    client_found = true;
+
+                    if (clients.get(i) instanceof StandardClient){
+
+                        if(((StandardClient) clients.get(i)).debit_Account==null) {
+
+                            //vincular cuenta
+
+                            DebitAccount tempDebAcc = new DebitAccount(accountNumber);
+                            //todo guardamos accountNumber en el archivo numberOfAccounts.dat
+                            accounts.add(tempDebAcc);
+                            //System.out.println("\nDebit account successfully created\n");
+
+                            ((StandardClient) clients.get(i)).addAccount(tempDebAcc);
+
+                            return tempDebAcc;
+
+                        }
+                        else {
+
+                            System.err.println("You can't add another debit account to the client\n");
+                            return null;
+
+                        }
+
+
+                    } else if (clients.get(i) instanceof ShareholderClient) {
+
+                        DebitAccount tempDebAcc = new DebitAccount(accountNumber);
+                        //todo guardamos accountNumber en el archivo numberOfAccounts.dat
+                        accounts.add(tempDebAcc);
+                        //System.out.println("\nDebit account successfully created\n");
+
+                        ((ShareholderClient) clients.get(i)).addAccount(tempDebAcc);
+
+                        return tempDebAcc;
+
+
+                    }
+                }
+
+            }
+
+            if (!client_found){
+
+                System.err.println("Client not found\n");
+                return null;
+            }
+
+
 
 
         } else if (election==2){
+
+            /*
+
             CreditAccount tempCredAcc = new CreditAccount(accountNumber);
             //todo guardamos accountNumber en el archivo numberOfAccounts.dat
             accounts.add(tempCredAcc);
             System.out.println("\nCredit account successfully created\n");
 
             return tempCredAcc;
+            */
+
+            System.out.print("Enter client DNI to vinculate: ");
+            String dni_selected = scText.nextLine();
+            boolean client_found = false;
+
+            for (int i=0; i<clients.size(); i++) {
+                if (clients.get(i).getDni().equalsIgnoreCase(dni_selected)){
+
+                    client_found = true;
+
+                    if (clients.get(i) instanceof StandardClient){
+
+                        System.err.println("Credit accounts are only for shareholder clients\n");
+                        return null;
+
+
+                    } else if (clients.get(i) instanceof ShareholderClient) {
+
+                        if(((ShareholderClient) clients.get(i)).credit_Account == null) {
+
+                            //vincular
+                            CreditAccount tempCredAcc = new CreditAccount(accountNumber);
+                            //todo guardamos accountNumber en el archivo numberOfAccounts.dat
+                            accounts.add(tempCredAcc);
+                            System.out.println("\nCredit account successfully created\n");
+                            ((ShareholderClient) clients.get(i)).addAccount(tempCredAcc);
+                            return tempCredAcc;
+
+                        }else {
+
+                            System.err.println("You can't add another credit account to the client\n");
+                            return null;
+
+
+                        }
+
+                    }
+                }
+
+            }
+
+            if (!client_found){
+
+                System.err.println("Client not found\n");
+                return null;
+            }
 
         }else {
 
@@ -204,6 +307,7 @@ public class Bank {
         }
 
 
+        return null;
 
     }
 
@@ -213,18 +317,55 @@ public class Bank {
         boolean found=false;
 
         System.out.print("Enter Client DNI: ");
-        dni = scText.next();
-
+        dni = scText.nextLine();
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
                 found=true;
-                clients.remove(i);
+
                 //todo borrar cuentas asociadas al cliente en el array de cuentas
+
+                //principio
+                if(clients.get(i) instanceof StandardClient){
+                    for(int j=0;j<accounts.size();j++){
+                        if(accounts.get(j).accountNumber.equalsIgnoreCase(((StandardClient) clients.get(i)).debit_Account.accountNumber)){
+                            accounts.remove(j);
+                        }
+                    }
+                }
+                else if (clients.get(i) instanceof ShareholderClient){
+                    for(int j=0;j<accounts.size();j++){
+                        if(((ShareholderClient) clients.get(i)).credit_Account!=null){
+                            if(accounts.get(j).accountNumber.equalsIgnoreCase(((ShareholderClient) clients.get(i)).credit_Account.accountNumber)){
+                                accounts.remove(j);
+                            }
+                        }
+                        else{
+                            System.err.println("No credit account vinculated to the client\n");
+                        }
+                        if(((ShareholderClient) clients.get(i)).debitAccounts.size()>0){
+                            for(int k=0;k<((ShareholderClient) clients.get(i)).debitAccounts.size();k++){
+                                if(accounts.get(j).accountNumber.equalsIgnoreCase(((ShareholderClient) clients.get(i)).debitAccounts.get(k).accountNumber)){
+                                    accounts.remove(j);
+                                }
+                            }
+                        }
+                        else{
+                            System.err.println("No debit accounts vinculated to the client\n");
+                        }
+                        //todo borrar si esta en las cuentas de debito
+
+                    }
+                }
+
+                //fin
+
+                clients.remove(i);
+
                 System.out.println("Client successfully removed\n");
             }
         }
         if (!found){
-            System.err.println("Client not found");
+            System.err.println("Client not found\n");
         }
 
     }
@@ -253,7 +394,7 @@ public class Bank {
                             }
                         }
                         else{
-                            System.out.println("No debit account associated to the client");
+                            System.err.println("No debit account associated to the client\n");
                         }
 
                     }
@@ -264,7 +405,7 @@ public class Bank {
                             }
                         }
                         else{
-                            System.out.println("No credit account associated to the client");
+                            System.err.println("No credit account associated to the client\n");
                         }
 
                         //todo otro if para las de debito con un for
@@ -276,7 +417,7 @@ public class Bank {
                             }
                         }
                         else{
-                            System.out.println("No debit accounts associated to the client");
+                            System.err.println("No debit accounts associated to the client\n");
                         }
 
                     }
@@ -286,7 +427,7 @@ public class Bank {
             }
         }
         if (!found){
-            System.err.println("Account not found");
+            System.err.println("Account not found\n");
         }
 
     }
@@ -297,7 +438,7 @@ public class Bank {
         boolean found=false;
 
         System.out.print("Enter Client DNI: ");
-        dni = scText.next();
+        dni = scText.nextLine();
 
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
@@ -313,7 +454,7 @@ public class Bank {
             }
         }
         if (!found){
-            System.err.println("Client not found");
+            System.err.println("Client not found\n");
         }
 
     }
@@ -338,7 +479,7 @@ public class Bank {
             }
         }
         if (!found){
-                System.err.println("Account not found");
+                System.err.println("Account not found\n");
         }
 
     }
@@ -380,14 +521,14 @@ public class Bank {
                             System.err.println("Error: "+e);
                         }
                     }catch(Exception e){
-                        System.err.println("Only numeric characters allowed");
+                        System.err.println("Only numeric characters allowed\n");
                     }
 
                 }
             }
         }
         if (!found){
-            System.err.println("Account not found");
+            System.err.println("Account not found\n");
         }
 
     }
@@ -422,14 +563,14 @@ public class Bank {
                             System.err.println("Error: "+e);
                         }
                     }catch(Exception e){
-                        System.err.println("Only numeric characters allowed");
+                        System.err.println("Only numeric characters allowed\n");
                     }
 
                 }
             }
         }
         if (!found){
-            System.err.println("Account not found");
+            System.err.println("Account not found\n");
         }
 
     }

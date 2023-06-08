@@ -56,4 +56,8 @@ public class FileHandler {
         return this.lines;
     }
 
+    public void clear(){
+        lines.clear();
+    }
+
 }
