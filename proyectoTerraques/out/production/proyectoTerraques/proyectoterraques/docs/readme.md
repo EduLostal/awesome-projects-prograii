@@ -1,37 +1,27 @@
-
-██████   █████  ███    ██  ██████  ██████      ███████  █████  ███    ██ ████████  █████  ███    ██ ██████  ███████ ██████  
-██   ██ ██   ██ ████   ██ ██      ██    ██     ██      ██   ██ ████   ██    ██    ██   ██ ████   ██ ██   ██ ██      ██   ██
-██████  ███████ ██ ██  ██ ██      ██    ██     ███████ ███████ ██ ██  ██    ██    ███████ ██ ██  ██ ██   ██ █████   ██████  
-██   ██ ██   ██ ██  ██ ██ ██      ██    ██          ██ ██   ██ ██  ██ ██    ██    ██   ██ ██  ██ ██ ██   ██ ██      ██   ██
-██████  ██   ██ ██   ████  ██████  ██████      ███████ ██   ██ ██   ████    ██    ██   ██ ██   ████ ██████  ███████ ██   ██ 
-
+    ██████   █████  ███    ██  ██████  ██████      ███████  █████  ███    ██ ████████  █████  ███    ██ ██████  ███████ ██████  
+    ██   ██ ██   ██ ████   ██ ██      ██    ██     ██      ██   ██ ████   ██    ██    ██   ██ ████   ██ ██   ██ ██      ██   ██
+    ██████  ███████ ██ ██  ██ ██      ██    ██     ███████ ███████ ██ ██  ██    ██    ███████ ██ ██  ██ ██   ██ █████   ██████  
+    ██   ██ ██   ██ ██  ██ ██ ██      ██    ██          ██ ██   ██ ██  ██ ██    ██    ██   ██ ██  ██ ██ ██   ██ ██      ██   ██
+    ██████  ██   ██ ██   ████  ██████  ██████      ███████ ██   ██ ██   ████    ██    ██   ██ ██   ████ ██████  ███████ ██   ██ 
 
 
 
 
-╔╦╗╔═╗╔═╗╔═╗╦═╗╦╔═╗╔═╗╦╔═╗╔╗╔
- ║║║╣ ╚═╗║  ╠╦╝║╠═╝║  ║║ ║║║║
-═╩╝╚═╝╚═╝╚═╝╩╚═╩╩  ╚═╝╩╚═╝╝╚╝
+    ╔╦╗╔═╗╔═╗╔═╗╦═╗╦╔═╗╔═╗╦╔═╗╔╗╔
+     ║║║╣ ╚═╗║  ╠╦╝║╠═╝║  ║║ ║║║║
+    ═╩╝╚═╝╚═╝╚═╝╩╚═╩╩  ╚═╝╩╚═╝╝╚╝
 
 
-
-
-
-Se trata de una aplicación de gestion bancaria, en este caso para el Banco Santander, donde en este caso el banco
+Se trata de una aplicación de gestión bancaria, en este caso para el Banco Santander, donde en este caso el banco
 Santander necesita un sistema en el que se puedan crear diferentes tipos de clientes y cuentas asi como una forma
 para que un trabajador de dicho banco dependiente en la sucursal en la que trabaje pueda acceder a dicho sistema de
 gestión
 
 
 
-
-
-╔═╗╦ ╦╔╗╔╔═╗╦╔═╗╔╗╔╔═╗╦  ╦╔╦╗╔═╗╔╦╗╔═╗╔═╗
-╠╣ ║ ║║║║║  ║║ ║║║║╠═╣║  ║ ║║╠═╣ ║║║╣ ╚═╗
-╚  ╚═╝╝╚╝╚═╝╩╚═╝╝╚╝╩ ╩╩═╝╩═╩╝╩ ╩═╩╝╚═╝╚═╝
-
-
-
+    ╔═╗╦ ╦╔╗╔╔═╗╦╔═╗╔╗╔╔═╗╦  ╦╔╦╗╔═╗╔╦╗╔═╗╔═╗
+    ╠╣ ║ ║║║║║  ║║ ║║║║╠═╣║  ║ ║║╠═╣ ║║║╣ ╚═╗
+    ╚  ╚═╝╝╚╝╚═╝╩╚═╝╝╚╝╩ ╩╩═╝╩═╩╝╩ ╩═╩╝╚═╝╚═╝
 
         
 * [ ] Un empleado del banco puede seleccionar a que oficina desea conectarse 
@@ -49,13 +39,15 @@ gestión
 * [ ] Mostrar las cuentas existentes (y los datos de dichas cuentas)
 * [ ] Depositar dinero en cuentas
 * [ ] Sacar dinero de cuentas
-* [ ] ...
+* [ ] ... 
 
 
 
-╦ ╦╔╦╗╦  
-║ ║║║║║
-╚═╝╩ ╩╩═╝
+    ╦ ╦╔╦╗╦  
+    ║ ║║║║║
+    ╚═╝╩ ╩╩═╝
+
+Diagrama UML de la aplicación.
 
 
 
@@ -63,11 +55,9 @@ gestión
 
 
 
-
-╔═╗╔═╗╔╦╗╦═╗╦ ╦╔═╗╔╦╗╦ ╦╦═╗╔═╗
-║╣ ╚═╗ ║ ╠╦╝║ ║║   ║ ║ ║╠╦╝╠═╣
-╚═╝╚═╝ ╩ ╩╚═╚═╝╚═╝ ╩ ╚═╝╩╚═╩ ╩
-
+    ╔═╗╔═╗╔╦╗╦═╗╦ ╦╔═╗╔╦╗╦ ╦╦═╗╔═╗
+    ║╣ ╚═╗ ║ ╠╦╝║ ║║   ║ ║ ║╠╦╝╠═╣
+    ╚═╝╚═╝ ╩ ╩╚═╚═╝╚═╝ ╩ ╚═╝╩╚═╩ ╩
 
 
 src.proyectoterraques.docs
@@ -125,18 +115,19 @@ test
 >
     
 
-╔═╗╔═╗╔═╗╔╦╗╦ ╦╦═╗╔═╗╔═╗
-║  ╠═╣╠═╝ ║ ║ ║╠╦╝╠═╣╚═╗
-╚═╝╩ ╩╩   ╩ ╚═╝╩╚═╩ ╩╚═╝
+
+    ╔═╗╔═╗╔═╗╔╦╗╦ ╦╦═╗╔═╗╔═╗
+    ║  ╠═╣╠═╝ ║ ║ ║╠╦╝╠═╣╚═╗
+    ╚═╝╩ ╩╩   ╩ ╚═╝╩╚═╩ ╩╚═╝
 
 
 Seran incluidas al desarrollarse la aplicacion...
 
 
 
-╦ ╦╔═╗╔═╗
-║ ║╚═╗║ ║
-╚═╝╚═╝╚═╝
+    ╦ ╦╔═╗╔═╗
+    ║ ║╚═╗║ ║
+    ╚═╝╚═╝╚═╝
 
 
 ## IDE (IntelliJ, NetBeans, etc.)
@@ -151,9 +142,9 @@ de un entorno de desarrollo debemos ejecutar el archivo "BancoSantander.jar"
 
     
 
-╔═╗╦ ╦╔╦╗╔═╗╦═╗╔═╗╔═╗
-╠═╣║ ║ ║ ║ ║╠╦╝║╣ ╚═╗
-╩ ╩╚═╝ ╩ ╚═╝╩╚═╚═╝╚═╝
+    ╔═╗╦ ╦╔╦╗╔═╗╦═╗╔═╗╔═╗
+    ╠═╣║ ║ ║ ║ ║╠╦╝║╣ ╚═╗
+    ╩ ╩╚═╝ ╩ ╚═╝╩╚═╚═╝╚═╝
 
 
 - HUGO FRESNO NAVARRO

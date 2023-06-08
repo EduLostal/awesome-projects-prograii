@@ -29,23 +29,26 @@ public class Bank {
 
    public void getClients() {
 
-       System.out.println("---CLIENT LIST---\n");
+       System.out.println("---CLIENT LIST---");
 
        for (int i =0;i<clients.size();i++){
 
            if (clients.get(i) instanceof ShareholderClient){
-               ((ShareholderClient) clients.get(i)).getFullData();
+               System.out.println( ((ShareholderClient)clients.get(i)).getFullData() );
            } else if (clients.get(i) instanceof StandardClient) {
-               ((StandardClient) clients.get(i)).getFullData();
+               System.out.println( ((StandardClient)clients.get(i)).getFullData() );
            }
 
+       }
+       if(clients.size()==0){
+           System.out.println("No clients found\n");
        }
 
    }
 
    public void getAccounts() {
 
-           System.out.println("---ACCOUNT LIST---\n");
+           System.out.println("---ACCOUNT LIST---");
 
         for (int i =0;i<accounts.size();i++){
 
@@ -56,6 +59,9 @@ public class Bank {
             }
 
         }
+       if(accounts.size()==0){
+           System.out.println("No accounts found\n");
+       }
    }
 
    public void newClient() throws InvalidCharacterException {
@@ -77,15 +83,15 @@ public class Bank {
        if (election==1){
 
            System.out.print("Dni: ");
-           dni = scText.next();
+           dni = scText.nextLine();
            System.out.print("Name: ");
-           name = scText.next();
+           name = scText.nextLine();
            System.out.print("Surname: ");
-           surname = scText.next();
+           surname = scText.nextLine();
            System.out.print("Address: ");
-           address = scText.next();
+           address = scText.nextLine();
            System.out.print("Phone Number: ");
-           phoneNumber = scText.next();
+           phoneNumber = scText.nextLine();
 
            StandardClient client = new StandardClient(dni,name,surname,address,phoneNumber);
 
@@ -93,31 +99,59 @@ public class Bank {
 
            Account acc = newAccount();
 
-           client.addAccount(acc);
+           boolean remove_acc = client.addAccount(acc);
 
-           clients.add(client);
+           if(remove_acc){
+               //todo borrar cuenta crecreada (acc)
+               for(int i=0;i<accounts.size();i++){
+                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                       accounts.remove(i);
+                       //System.out.println("Cuenta borrada");
+                   }
+               }
+           }else{
+               clients.add(client);
+               //System.out.println("xxx");
+               //System.out.println(clients.get(0).dni);
+           }
+
+
 
            //TODO  añadir el cliente al archivo clients.dat
 
        } else if (election==2){
            System.out.print("Dni: ");
-           dni = scText.next();
+           dni = scText.nextLine();
            System.out.print("Name: ");
-           name = scText.next();
+           name = scText.nextLine();
            System.out.print("Surname: ");
-           surname = scText.next();
+           surname = scText.nextLine();
            System.out.print("Address: ");
-           address = scText.next();
+           address = scText.nextLine();
            System.out.print("Phone Number: ");
-           phoneNumber = scText.next();
+           phoneNumber = scText.nextLine();
 
            ShareholderClient client = new ShareholderClient(dni,name,surname,address,phoneNumber);
 
            Account acc = newAccount();
 
-           client.addAccount(acc);
+           boolean remove_acc = client.addAccount(acc);
 
-           clients.add(client);
+           if(remove_acc){
+               //todo borrar cuenta crecreada (acc)
+               for(int i=0;i<accounts.size();i++){
+                   if(accounts.get(i).accountNumber.equalsIgnoreCase(acc.accountNumber)){
+                       accounts.remove(i);
+                       //System.out.println("Cuenta borrada");
+                   }
+               }
+           }else{
+               clients.add(client);
+               //System.out.println("yyy");
+           }
+
+
+
 
            //TODO  añadir el cliente al archivo clients.dat
 
@@ -173,48 +207,150 @@ public class Bank {
 
     }
 
-    public void removeClient(String dni){
+    public void removeClient(){
 
+        String dni;
+        boolean found=false;
+
+        System.out.print("Enter Client DNI: ");
+        dni = scText.next();
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
+                found=true;
+
+                //todo borrar cuentas asociadas al cliente en el array de cuentas
+
+                //principio
+                if(clients.get(i) instanceof StandardClient){
+                    for(int j=0;j<accounts.size();j++){
+                        if(accounts.get(j).accountNumber.equalsIgnoreCase(((StandardClient) clients.get(i)).debit_Account.accountNumber)){
+                            accounts.remove(j);
+                        }
+                    }
+                }
+                else if (clients.get(i) instanceof ShareholderClient){
+                    for(int j=0;j<accounts.size();j++){
+                        if(((ShareholderClient) clients.get(i)).credit_Account!=null){
+                            if(accounts.get(j).accountNumber.equalsIgnoreCase(((ShareholderClient) clients.get(i)).credit_Account.accountNumber)){
+                                accounts.remove(j);
+                            }
+                        }
+                        else{
+                            System.out.println("No credit account inoculated to the client");
+                        }
+                        if(((ShareholderClient) clients.get(i)).debitAccounts.size()>0){
+                            for(int k=0;k<((ShareholderClient) clients.get(i)).debitAccounts.size();k++){
+                                if(accounts.get(j).accountNumber.equalsIgnoreCase(((ShareholderClient) clients.get(i)).debitAccounts.get(k).accountNumber)){
+                                    accounts.remove(j);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("No debit accounts inoculated to the client");
+                        }
+                        //todo borrar si esta en las cuentas de debito
+
+                    }
+                }
+
+                //fin
+
                 clients.remove(i);
-                System.out.println("Client successfully removed");
-            }else {
-                System.out.println("Client not found");
+
+                System.out.println("Client successfully removed\n");
             }
+        }
+        if (!found){
+            System.err.println("Client not found");
         }
 
     }
 
-    public void removeAccount(String accountNumber){
+    public void removeAccount(){
+
+        String accountNumber;
+        boolean found=false;
+
+        System.out.print("Enter Account Number: ");
+        accountNumber = scText.nextLine();
 
         for (int i=0; i<accounts.size();i++){
+
             if (accountNumber.equalsIgnoreCase(accounts.get(i).getAccountNumber())){
+                found=true;
                 accounts.remove(i);
-                System.out.println("Account successfully removed");
-            }else {
-                System.out.println("Account not found");
+
+                //todo borrar tambien la cuenta del cliente que la tiene
+
+                for(int j=0;j<clients.size();j++){
+                    if(clients.get(j) instanceof StandardClient){
+                        if(((StandardClient)clients.get(j)).debit_Account!=null){
+                            if( ((StandardClient)clients.get(j)).debit_Account.accountNumber.equalsIgnoreCase(accountNumber) ){
+                                ((StandardClient)clients.get(j)).debit_Account=null;
+                            }
+                        }
+                        else{
+                            System.out.println("No debit account associated to the client");
+                        }
+
+                    }
+                    else if(clients.get(j) instanceof ShareholderClient){
+                        if(((ShareholderClient)clients.get(j)).credit_Account!=null){
+                            if( ((ShareholderClient)clients.get(j)).credit_Account.accountNumber.equalsIgnoreCase(accountNumber) ){
+                                ((ShareholderClient)clients.get(j)).credit_Account=null;
+                            }
+                        }
+                        else{
+                            System.out.println("No credit account associated to the client");
+                        }
+
+                        //todo otro if para las de debito con un for
+                        if(((ShareholderClient)clients.get(j)).debitAccounts.size()>0){
+                            for(int k=0;k<((ShareholderClient)clients.get(j)).debitAccounts.size();k++){
+                                if(((ShareholderClient)clients.get(j)).debitAccounts.get(k).accountNumber.equalsIgnoreCase(accountNumber)){
+                                    ((ShareholderClient)clients.get(j)).debitAccounts.remove(k);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("No debit accounts associated to the client");
+                        }
+
+                    }
+                }
+
+                System.out.println("Account successfully removed\n");
             }
+        }
+        if (!found){
+            System.err.println("Account not found");
         }
 
     }
 
-    public void showClient(String dni){
+    public void showClient(){
+
+        String dni;
+        boolean found=false;
+
+        System.out.print("Enter Client DNI: ");
+        dni = scText.next();
 
         for (int i=0; i<clients.size();i++){
             if (dni.equalsIgnoreCase(clients.get(i).getDni())){
-
+                found = true;
                 if (clients.get(i) instanceof StandardClient){
-                    clients.get(i).getFullData();
+                    System.out.println(clients.get(i).getFullData());
                     ((StandardClient) clients.get(i)).listAccounts();
 
                 } else if (clients.get(i) instanceof ShareholderClient){
-                    clients.get(i).getFullData();
+                    System.out.println(clients.get(i).getFullData());
                     ((ShareholderClient) clients.get(i)).listAccounts();
                 }
-            }else {
-                System.out.println("Client not found");
             }
+        }
+        if (!found){
+            System.err.println("Client not found");
         }
 
     }

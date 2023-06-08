@@ -71,7 +71,7 @@ interface proyectoterraques.source.AccountBalance {
 }
 
 interface proyectoterraques.source.ClientManagement {
-+void addAccount(Account)
++boolean addAccount(Account)
 +void removeAccount(String)
 +void listAccounts()
 

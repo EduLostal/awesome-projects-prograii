@@ -21,6 +21,16 @@ public class Main2 {
          */
 
         bank.newClient();
-
+        bank.getClients();
+        //bank.showClient();
+        bank.getAccounts();
+        bank.depositMoney();
+        //bank.getClients();
+        //bank.getAccounts();
+        //bank.removeAccount();
+        bank.removeClient();
+        bank.getClients();
+        bank.getAccounts();
+        bank.showClient();
     }
 }
