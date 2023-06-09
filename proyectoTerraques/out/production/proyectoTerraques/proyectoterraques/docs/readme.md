@@ -115,9 +115,24 @@ En este paquete se encuentran todas las clases que dan funcionalidad a la aplica
 
 test
 ------
-> Test1: 
->
+ 
+
+
+
+
+
+
+
+    ╦╔╗╔╔═╗╔╦╗╦═╗╦ ╦╔═╗╔═╗╦╔═╗╔╗╔╔═╗╔═╗  ╔╦╗╔═╗  ╦ ╦╔═╗╔═╗
+    ║║║║╚═╗ ║ ╠╦╝║ ║║  ║  ║║ ║║║║║╣ ╚═╗   ║║║╣   ║ ║╚═╗║ ║
+    ╩╝╚╝╚═╝ ╩ ╩╚═╚═╝╚═╝╚═╝╩╚═╝╝╚╝╚═╝╚═╝  ═╩╝╚═╝  ╚═╝╚═╝╚═╝
     
+Dejamos unas instrucciones para que se sepa como funciona y poder navegar cómodamente por la aplicación.
+
+1- En cuanto se inicia la aplicación (En la clase Login) nos salen dos (2) opciones. Login y Exit, si queremos seguir utilizando la aplicación le daremos al número 1 (Login).
+
+
+
 
 
     ╔═╗╔═╗╔═╗╔╦╗╦ ╦╦═╗╔═╗╔═╗

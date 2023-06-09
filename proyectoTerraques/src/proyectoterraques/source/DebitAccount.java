@@ -4,8 +4,8 @@ import proyectoterraques.exceptions.InvalidCharacterException;
 
 public class DebitAccount extends Account implements AccountBalance {
 
-    public DebitAccount(String accountNumber) {
-        super(accountNumber);
+    public DebitAccount(String accountNumber, String dni) {
+        super(accountNumber,dni);
     }
 
     @Override
@@ -21,7 +21,9 @@ public class DebitAccount extends Account implements AccountBalance {
     @Override
     public void showAccountData() {
         System.out.println("Account - "+accountNumber);
-        System.out.println("Balance - "+amount+"€\n");
+        System.out.println("Balance - "+amount+"€");
+        System.out.println("Client DNI - "+dni+"\n");
+
 
     }
 
